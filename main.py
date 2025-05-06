@@ -7,24 +7,40 @@ def merge_lists(list_1, list_2):
     composed of elements from both lists. Duplicate values are not
     included in the resulting list and the sort order is maintained.
     """
-    if list_1 != list_2:  # if lists are same, just skip to return
-        exists = set(list_1)
+    merged_list = []
+    i = 0
+    j = 0
+    if list_1 == list_2:
+        return list_1
 
-        try:
-            for i_2 in range(len(list_2)):
-                if list_2[i_2] in exists:
-                    continue
-                is_biggest = True
+    try:
 
-                for i in range(len(list_1)):
-                    if list_2[i_2] < list_1[i]:
-                        list_1.insert(i, list_2[i_2])
-                        is_biggest = False
-                        break
+        while i < len(list_1) and j < len(list_2):
+            if type(list_1[i]) is not int or type(list_2[j]) is not int:
+                raise TypeError
 
-                if is_biggest:
-                    list_1.append(list_2[i_2])
-        except TypeError:
-            return "Merge failed: invalid element present."
+            if list_1[i] <= list_2[j]:
+                merged_list.append(list_1[i])
+                i += 1
+            else:
+                merged_list.append(list_2[j])
+                j += 1
 
-    return list_1
+        while i < len(list_1):
+            if type(list_1[i]) is not int:
+                raise TypeError
+
+            merged_list.append(list_1[i])
+            i += 1
+
+        while j < len(list_2):
+            if type(list_2[j]) is not int:
+                raise TypeError
+
+            merged_list.append(list_2[j])
+            j += 1
+
+    except TypeError:
+        return "Merge failed: invalid element present."
+
+    return merged_list
