@@ -45,6 +45,7 @@ def merge_lists(list_1, list_2):
 
 
 def validate_num(element):
+    """Return integer value if element is of type 'int'."""
     if type(element) is not int:
         raise TypeError
 
