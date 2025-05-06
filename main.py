@@ -16,31 +16,36 @@ def merge_lists(list_1, list_2):
     try:
 
         while i < len(list_1) and j < len(list_2):
-            if type(list_1[i]) is not int or type(list_2[j]) is not int:
-                raise TypeError
+            num_1 = validate_num(list_1[i])
+            num_2 = validate_num(list_2[j])
 
-            if list_1[i] <= list_2[j]:
-                merged_list.append(list_1[i])
+            if num_1 <= num_2:
+                merged_list.append(num_1)
                 i += 1
             else:
-                merged_list.append(list_2[j])
+                merged_list.append(num_2)
                 j += 1
 
         while i < len(list_1):
-            if type(list_1[i]) is not int:
-                raise TypeError
+            num = validate_num(list_1[i])
 
-            merged_list.append(list_1[i])
+            merged_list.append(num)
             i += 1
 
         while j < len(list_2):
-            if type(list_2[j]) is not int:
-                raise TypeError
+            num = validate_num(list_2[j])
 
-            merged_list.append(list_2[j])
+            merged_list.append(num)
             j += 1
 
     except TypeError:
         return "Merge failed: invalid element present."
 
     return merged_list
+
+
+def validate_num(element):
+    if type(element) is not int:
+        raise TypeError
+
+    return element
