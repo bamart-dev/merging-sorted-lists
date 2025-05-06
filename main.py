@@ -10,8 +10,6 @@ def merge_lists(list_1, list_2):
     merged_list = []
     i = 0
     j = 0
-    if list_1 == list_2:
-        return list_1
 
     try:
 
